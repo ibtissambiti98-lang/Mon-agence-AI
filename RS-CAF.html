@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Restaurant & Café</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* المتغيرات الأساسية لتناسق الألوان */
+        :root {
+            --primary-color: #cda45e; /* لون ذهبي عصري للمطاعم */
+            --bg-dark: #0c0b09;
+            --bg-light: #1a1814;
+            --text-color: #fff;
+            --text-muted: #a49b89;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* شريط التنقل العلوي */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(12, 11, 9, 0.9);
+            border-bottom: 1px solid #37332a;
+            z-index: 1000;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .logo span { color: var(--primary-color); }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* زر تغيير اللغة */
+        .lang-switcher {
+            background: #28251f;
+            color: #fff;
+            border: 1px solid var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            outline: none;
+        }
+
+        /* زر الاتصال السريع */
+        .call-btn {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .call-btn:hover { background: #d3af71; }
+
+        /* الواجهة الترحيبية - خلفية عصرية */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1200') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            padding-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .hero h1 span { color: var(--primary-color); }
+
+        .hero p {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .btn-menu {
+            border: 2px solid var(--primary-color);
+            color: #fff;
+            padding: 10px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.4s;
+        }
+        .btn-menu:hover {
+            background: var(--primary-color);
+        }
+
+        /* الأقسام العامة */
+        section {
+            padding: 60px 20px;
+            background: var(--bg-light);
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title h2 {
+            font-size: 32px;
+            color: #fff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* المينيو العصري التفاعلي */
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            background: var(--bg-dark);
+            border: 1px solid #37332a;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .menu-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .menu-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .menu-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .menu-price {
+            color: var(--primary-color);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .order-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .order-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        /* آراء الزبناء */
+        .testimonials {
+            background: var(--bg-dark);
+        }
+        .testimonial-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .testimonial-item {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-color);
+        }
+        .testimonial-item p {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #dfdfdf;
+        }
+        .testimonial-item h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* موقع المطعم */
+        .map-section {
+            padding: 40px 20px;
+        }
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #37332a;
+        }
+        iframe {
+            width: 100%;
+            height: 350px;
+            border: 0;
+            display: block;
+        }
+
+        /* زر الواتساب العائم السريع */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* التجاوب التام مع الهواتف الذكية */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 16px; }
+            header { padding: 10px 15px; }
+            .logo { font-size: 20px; }
+            .call-btn span { display: none; } /* إخفاء النص في الهاتف وترك الأيقونة للسرعة والنظافة */
+            .call-btn { padding: 10px; border-radius: 50%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Café<span>Resto</span></div>
+        <div class="nav-controls">
+            <select class="lang-switcher" onchange="changeLanguage(this.value)">
+                <option value="fr">Français</option>
+                <option value="ar">العربية</option>
+                <option value="en">English</option>
+            </select>
+            <a href="tel:+212600000000" class="call-btn">
+                <i class="fa-solid fa-phone"></i><span>Appeler</span>
+            </a>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <h1 id="hero-title">Une Expérience <span>Gastronomique</span> Unique</h1>
+        <p id="hero-desc">"Le goût de l'élégance et de la fraîcheur dans chaque assiette, à des prix imbattables."</p>
+        <a href="#menu" class="btn-menu" id="hero-btn">Notre Menu</a>
+    </section>
+
+    <section id="menu">
+        <div class="section-title">
+            <h2 id="menu-title">Notre Menu Spécial</h2>
+        </div>
+        <div class="menu-container">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=500" alt="Pizza" class="menu-img">
+                <div class="menu-info">
+                    <div class="menu-name">Pizza Chef</div>
+                    <div class="menu-price">45 DH</div>
+                    <a href="https://wa.me/212600000000?text=Bonjour,%20je%20souhaite%20commander%20Pizza%20Chef" class="order-btn" target="_blank">
+                        <i class="fa-solid fa-basket-shopping"></i> <span class="order-txt">Commander</span>
+                    </a>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=500" alt="Salade" class="menu-img">
+                <div class="menu-info">
+                    <div class="menu-name">Salade Fraîche</div>
+                    <div class="menu-price">30 DH</div>
+                    <a href="https://wa.me/212600000000?text=Bonjour,%20je%20souhaite%20commander%20Salade%20Fraiche" class="order-btn" target="_blank">
+                        <i class="fa-solid fa-basket-shopping"></i> <span class="order-txt">Commander</span>
+                    </a>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=500" alt="Burger" class="menu-img">
+                <div class="menu-info">
+                    <div class="menu-name">Burger Gourmet</div>
+                    <div class="menu-price">50 DH</div>
+                    <a href="https://wa.me/212600000000?text=Bonjour,%20je%20souhaite%20commander%20Burger%20Gourmet" class="order-btn" target="_blank">
+                        <i class="fa-solid fa-basket-shopping"></i> <span class="order-txt">Commander</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="reviews">
+        <div class="section-title">
+            <h2 id="review-title">Avis de nos Clients</h2>
+        </div>
+        <div class="testimonial-container">
+            <div class="testimonial-item">
+                <p>"Une propreté irréprochable et un service très rapide. Les prix sont très bas par rapport à la haute qualité."</p>
+                <h4>- Amine K.</h4>
+            </div>
+            <div class="testimonial-item">
+                <p>"Le café est excellent et l'ambiance est super moderne. Je recommande vivement la Pizza Chef !"</p>
+                <h4>- Sarah M.</h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section" id="location">
+        <div class="section-title">
+            <h2 id="location-title">Notre Emplacement</h2>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3236.436979685338!2d-5.8055!3d35.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQ2JzEyLjAiTiA1wrA0OCcxOS44Ilc!5e0!3m2!1sfr!2sma!4v1625000000000!5m2!1sfr!2sma"></iframe>
+        </div>
+    </section>
+
+    <a href="https://wa.me/212600000000" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        const translations = {
+            fr: {
+                title: "Une Expérience <span>Gastronomique</span> Unique",
+                desc: '"Le goût de l\'élégance et de la fraîcheur dans chaque assiette, à des prix imbattables."',
+                btn: "Notre Menu",
+                menuTitle: "Notre Menu Spécial",
+                order: "Commander",
+                reviews: "Avis de nos Clients",
+                location: "Notre Emplacement"
+            },
+            ar: {
+                title: "تجربة <span>طهي</span> فريدة ومودرن",
+                desc: '"مذاق الأناقة والانتعاش في كل طبق، وبأثمنة مناسبة ومنخفضة جداً."',
+                btn: "تصفح المينيو",
+                menuTitle: "قائمتنا الخاصة",
+                order: "اطلب الآن",
+                reviews: "آراء زبنائنا الكرام",
+                location: "موقع المطعم"
+            },
+            en: {
+                title: "A Unique <span>Gastronomic</span> Experience",
+                desc: '"The taste of elegance and freshness in every dish, at unbeatable prices."',
+                btn: "Our Menu",
+                menuTitle: "Our Special Menu",
+                order: "Order Now",
+                reviews: "Our Customers' Reviews",
+                location: "Our Location"
+            }
+        };
+
+        function changeLanguage(lang) {
+            // تغيير اتجاه الصفحة إذا كانت اللغة عربية ليتناسق التصميم تلقائياً
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = lang;
+            }
+
+            // تحديث النصوص بسلاسة وسرعة
+            document.getElementById('hero-title').innerHTML = translations[lang].title;
+            document.getElementById('hero-desc').innerText = translations[lang].desc;
+            document.getElementById('hero-btn').innerText = translations[lang].btn;
+            document.getElementById('menu-title').innerText = translations[lang].menuTitle;
+            document.getElementById('review-title').innerText = translations[lang].reviews;
+            document.getElementById('location-title').innerText = translations[lang].location;
+            
+            // تحديث أزرار الطلب
+            const orderButtons = document.querySelectorAll('.order-txt');
+            orderButtons.forEach(btn => {
+                btn.innerText = translations[lang].order;
+            });
+        }
+    </script>
+</body>
+</html>
