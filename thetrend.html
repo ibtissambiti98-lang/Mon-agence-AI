@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Trend Beauty Salon | Luxury Experience</title>
+    <style>
+        :root {
+            --gold: #c5a880;
+            --dark-gold: #b39266;
+            --bg-pink: #fff5f5;
+            --text-dark: #2c2c2c;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-pink);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        /* شرط: قائمة تنقل ثابتة في الأعلى */
+        navbar {
+            position: fixed;
+            top: 0; right: 0; left: 0;
+            background-color: rgba(44, 44, 44, 0.95);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        navbar .logo { color: var(--gold); font-weight: bold; font-size: 1.2em; text-decoration: none; font-family: 'Playfair Display', serif; }
+        navbar .nav-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+        navbar .nav-links a { color: white; text-decoration: none; font-size: 0.95em; transition: 0.3s; }
+        navbar .nav-links a:hover { color: var(--gold); }
+
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 140px 20px 100px;
+        }
+        header h1 { font-size: 3.5em; margin: 0; letter-spacing: 2px; font-family: 'Playfair Display', serif; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); }
+        header p { font-size: 1.4em; margin: 10px 0 0; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); font-weight: 500; }
+        header .en-sub { font-size: 1.1em; color: var(--gold); font-style: italic; margin-top: 5px; font-family: 'Georgia', serif; direction: ltr; }
+        
+        .container { max-width: 1100px; margin: auto; padding: 60px 20px; }
+        
+        h2.section-title { text-align: center; font-size: 2.2em; color: var(--dark-gold); margin-bottom: 40px; position: relative; }
+        h2.section-title span { display: block; font-size: 0.5em; color: #888; letter-spacing: 2px; margin-top: 5px; font-family: 'Georgia', serif; }
+        h2.section-title::after { content: ''; display: block; width: 80px; height: 3px; background: var(--gold); margin: 10px auto 0; }
+
+        .services-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(197, 168, 128, 0.2); }
+        .service-img { width: 100%; height: 200px; object-fit: cover; }
+        .service-info { padding: 20px; text-align: right; }
+        .service-info h3 { margin: 0 0 5px; color: var(--dark-gold); font-size: 1.3em; }
+        .service-info .en-title { text-align: right; font-size: 1em; color: #888; font-style: italic; margin-bottom: 10px; font-family: 'Georgia', serif; direction: ltr; }
+        .service-info p { color: #555; font-size: 0.95em; line-height: 1.6; margin-bottom: 8px; }
+        .service-info .en-desc { color: #777; font-size: 0.85em; line-height: 1.5; text-align: left; direction: ltr; font-family: 'Georgia', serif; margin-top: 5px; border-top: 1px dashed #eee; padding-top: 5px; }
+        .price { font-weight: bold; color: var(--text-dark); font-size: 1.1em; display: block; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; }
+
+        /* شرط: قسم لماذا تختاريننا */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        .feature-box { background: white; padding: 30px 20px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.02); border-bottom: 3px solid var(--gold); }
+        .feature-box h3 { color: var(--dark-gold); margin: 10px 0 5px; font-size: 1.2em; }
+        .feature-box .en-feat { font-size: 0.9em; color: #888; font-style: italic; font-family: 'Georgia', serif; display: block; margin-bottom: 10px; }
+        .feature-box p { color: #666; font-size: 0.9em; line-height: 1.5; margin: 0; }
+
+        .testimonials { background: white; padding: 40px; border-radius: 20px; margin: 60px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.02); text-align: center; }
+        .review-box { font-style: italic; font-size: 1.1em; color: #555; max-width: 800px; margin: auto; line-height: 1.6; }
+        .review-box .en-review { display: block; font-size: 0.9em; color: #777; margin-top: 10px; direction: ltr; font-family: 'Georgia', serif; }
+        .review-author { font-weight: bold; color: var(--dark-gold); margin-top: 15px; display: block; }
+
+        /* شرط: استمارة الاتصال الفنية */
+        .contact-form { background: white; padding: 30px; border-radius: 20px; max-width: 600px; margin: 40px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .form-group { margin-bottom: 15px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9em; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
+        .btn-submit { background: var(--dark-gold); color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.3s; }
+        .btn-submit:hover { background: var(--text-dark); }
+
+        .cta-section { text-align: center; background: linear-gradient(135deg, #2c2c2c, #1a1a1a); color: white; padding: 50px 20px; border-radius: 20px; margin-top: 60px; }
+        .cta-section h3 { font-size: 2em; margin-bottom: 5px; color: var(--gold); }
+        .cta-section .en-cta { font-size: 1.2em; color: #ccc; font-style: italic; display: block; margin-bottom: 15px; font-family: 'Georgia', serif; direction: ltr; }
+        .btn-whatsapp { background-color: #25D366; color: white; padding: 16px 40px; border: none; border-radius: 35px; font-size: 1.2em; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); transition: 0.3s; margin-top: 10px; }
+        .btn-whatsapp:hover { transform: scale(1.05); background-color: #20ba5a; }
+        .btn-whatsapp span { display: block; font-size: 0.75em; font-weight: normal; font-family: 'Georgia', serif; direction: ltr; }
+
+        /* شرط: تذييل الصفحة الاحترافي */
+        footer { background: #1a1a1a; color: #aaa; text-align: center; padding: 30px 20px; margin-top: 60px; font-size: 0.9em; border-top: 3px solid var(--gold); }
+        footer p { margin: 5px 0; }
+        footer .en-foot { font-family: 'Georgia', serif; font-size: 0.85em; color: #666; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. قائمة تنقل ثابتة (تطابق شروط الصورة) -->
+    <navbar>
+        <a href="#" class="logo">THE TREND</a>
+        <ul class="nav-links">
+            <li><a href="#">الرئيسية / Home</a></li>
+            <li><a href="#services">خدماتنا / Services</a></li>
+            <li><a href="#why-us">ميزاتنا / Why Us</a></li>
+            <li><a href="#contact">اتصلي بنا / Contact</a></li>
+        </ul>
+    </navbar>
+
+    <header>
+        <h1>THE TREND BEAUTY SALON</h1>
+        <p>اكتشفي سر أناقتكِ وتميزكِ مع خبيراتنا</p>
+        <div class="en-sub">Discover the secret of your elegance with our experts</div>
+    </header>
+
+    <div class="container">
+        
+        <!-- قسم الخدمات -->
+        <h2 id="services" class="section-title">✨ خدماتنا الفاخرة <span>Our Luxury Services</span></h2>
+        <div class="services-container">
+            <div class="service-card">
+                <img class="service-img" src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=500&auto=format&fit=crop" alt="عناية بالشعر">
+                <div class="service-info">
+                    <h3>تسريحات وعناية بالشعر الاحترافية</h3>
+                    <div class="en-title">Professional Hair Styling & Care</div>
+                    <p>قص، تصفيف، وصبغ الشعر بأحدث الصيحات العالمية وباستخدام أفضل المنتجات المغذية لحماية بريق شعركِ.</p>
+                    <div class="en-desc">Expert cutting, styling, and coloring according to global trends, using premium nourishing products to protect your hair's shine.</div>
+                    <span class="price">ابتداءً من 150 درهم / Starting from 150 AED</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img class="service-img" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=500&auto=format&fit=crop" alt="مكياج">
+                <div class="service-info">
+                    <h3>مكياج السهرات والمناسبات</h3>
+                    <div class="en-title">Glamour Makeup & Special Events</div>
+                    <p>إطلالة ساحرة ومخصصة تبرز ملامح جمالكِ الطبيعي بأنامل خبيرات التجميل لدينا لتكوني نجمة الحفل.</p>
+                    <div class="en-desc">A charming, customized look that enhances your natural beauty by our professional makeup artists to make you the star of the event.</div>
+                    <span class="price">ابتداءً من 350 درهم / Starting from 350 AED</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img class="service-img" src="https://images.unsplash.com/photo-1604654894610-df4906be1573?q=80&w=500&auto=format&fit=crop" alt="أظافر">
+                <div class="service-info">
+                    <h3>العناية بالأظافر والمانيكير</h3>
+                    <div class="en-title">Nail Care & Luxury Manicure</div>
+                    <p>جلسات تدليل متكاملة لليدين والقدمين مع تركيب وتزيين الأظافر بألوان ورسومات عصرية ومقاومة.</p>
+                    <div class="en-desc">Complete pampering sessions for hands and feet, including nail extension and art with trendy, long-lasting premium colors.</div>
+                    <span class="price">ابتداءً من 80 درهم / Starting from 80 AED</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. قسم لماذا تختاريننا بـ 3 ميزات (تطابق شروط الصورة) -->
+        <h2 id="why-us" class="section-title">💎 لماذا تختارين صالوننا؟ <span>Why Choose Our Salon?</span></h2>
+        <div class="features-grid">
+            <div class="feature-box">
+                <h3>👑 منتجات عالمية فاخرة</h3>
+                <span class="en-feat">Premium Global Products</span>
+                <p>نستخدم فقط المنتجات الأصلية والموثوقة لحماية بشرتكِ وشعركِ وضمان نتائج تدوم طويلاً.</p>
+            </div>
+            <div class="feature-box">
+                <h3>👩‍نان مهارات وخبيرات</h3>
+                <span class="en-feat">Expert & Certified Stylists</span>
+                <p>فريقنا يتكون من خبيرات تجميل معتمدات يتابعن أحدث صيحات الموضة والجمال العالمية بدقة.</p>
+            </div>
+            <div class="feature-box">
+                <h3>✨ تجربة ملكية مريحة</h3>
+                <span class="en-feat">Royal & Relaxing Experience</span>
+                <p>نوفر لكِ أجواءً هادئة ومريحة لتستمتعي بكل لحظة دلال داخل الصالون بعيداً عن صخب الحياة.</p>
+            </div>
+        </div>
+
+        <!-- الآراء -->
+        <div class="testimonials">
+            <div class="review-box">
+                "تجربتي مع صالون THE TREND كانت مذهلة بكل المقاييس! الاستقبال راقٍ جداً، والخدمة احترافية وسريعة، والنتيجة تجاوزت توقعاتي بكثير. أنصح به بشدة."
+                <span class="en-review">"My experience with THE TREND salon was amazing by all standards! Very elegant reception, professional and fast service."</span>
+                <span class="review-author">— مريم أ. (Mariam A.)</span>
+            </div>
+        </div>
+
+        <!-- 3. استمارة الاتصال (تطابق شروط الصورة) -->
+        <h2 id="contact" class="section-title">✉️ اتصلي بنا <span>Get In Touch</span></h2>
+        <div class="contact-form">
+            <form onsubmit="event.preventDefault(); alert('🚀 Thank you for your message!');">
+                <div class="form-group">
+                    <label>الاسم الكامل / Full Name</label>
+                    <input type="text" placeholder="ادخلي اسمكِ هنا" required>
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني / Email Address</label>
+                    <input type="email" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>رسالتكِ / Your Message</label>
+                    <textarea rows="4" placeholder="كيف يمكننا مساعدتكِ؟" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">إرسال الرسالة / Send Message</button>
+            </form>
+        </div>
+
+        <div class="cta-section">
+            <h3>هل أنتِ جاهزة للتجربة الملكية؟</h3>
+            <span class="en-cta">Are you ready for the Royal Experience?</span>
+            <p>لا تنتظري في الطابور! اضغطي لربط الاتصال المباشر وحجز موعدكِ المفصل عبر الواتساب فوراً.</p>
+            <button class="btn-whatsapp" onclick="alert('🚀 WhatsApp System Connected Successfully!')">
+                🟢 احجزي موعدكِ عبر الواتساب الآن
+                <span>Book Your Appointment via WhatsApp Now</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- 4. تذييل الصفحة بمعلومات افتراضية (تطابق شروط الصورة) -->
+    <footer>
+        <p>📍 123 شارع الجمال، جليز، مراكش، المغرب</p>
+        <p>📞 الهاتف: 0522XXXXXX | ✉️ الإيميل: info@thetrendsalon.com</p>
+        <p class="en-foot">© 2026 THE TREND Beauty Salon. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
+Rédiger
+Écrire à Niso Zardos
