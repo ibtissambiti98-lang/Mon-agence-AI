@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -105,14 +106,14 @@
             transition: var(--transition);
             margin-left: 15px;
             font-family: 'Cairo', 'Poppins', sans-serif;
-            appearance: none; /* إخفاء السهم الافتراضي للمتصفح */
+            appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 16px;
-            padding-right: 35px; /* مساحة للسهم */
+            padding-right: 35px;
         }
         body.ltr .lang-dropdown {
             margin-left: 0;
@@ -121,11 +122,6 @@
         .lang-dropdown option {
             background-color: var(--bg-card);
             color: var(--text-light);
-        }
-        .lang-dropdown:hover, .lang-dropdown:focus {
-            background-color: rgba(212, 175, 55, 0.1);
-            border-color: var(--gold-hover);
-            color: var(--gold-hover);
         }
 
         .hero {
@@ -329,8 +325,7 @@
             <li><a href="#testimonials" class="lang-text" data-ar="آراء العملاء" data-fr="Avis" data-en="Reviews">آراء العملاء</a></li>
         </ul>
         
-        <!-- القائمة المنسدلة للغات -->
-        <select id="languageSelect" class="lang-dropdown">
+        <select id="languageSelect" class="lang-dropdown" onchange="changeLanguage(this.value)">
             <option value="ar">العربية</option>
             <option value="fr">Français</option>
             <option value="en">English</option>
@@ -350,200 +345,4 @@
 
     <section class="about" id="about">
         <h2 class="section-title lang-text" data-ar="قصة الفخامة والخبرة" data-fr="Notre Histoire" data-en="Our Story">قصة الفخامة والخبرة</h2>
-        <p class="section-subtitle lang-text" data-ar="شغف ممتد لسنوات لتقديم الأفضل" data-fr="Un savoir-faire d'excellence" data-en="Years of excellence and passion">شغف ممتد لسنوات لتقديم الأفضل</p>
-        <div class="about-content lang-text" 
-             data-ar="تأسس مطعمنا على يد نخبة من أمهر الطهاة الدوليين الحائزين على جوائز عالمية، ممتدين بخبرة عريقة تفوق الـ 15 عاماً في أرقى الفنادق والمطاعم العالمية. نحن لا نقدم مجرد وجبات، بل نصنع لوحات فنية ومذاقات ساحرة تأخذك في رحلة حول العالم."
-             data-fr="Notre restaurant a été fondé par une élite de chefs internationaux primés, dotés d'une expérience de plus de 15 ans dans les plus prestigieux hôtels. Nous créons des chefs-d'œuvre gustatifs uniques."
-             data-en="Our restaurant was founded by an elite group of award-winning international chefs, with over 15 years of culinary experience in the world’s finest luxury hotels. We create sensory masterpieces.">
-             تأسس مطعمنا على يد نخبة من أمهر الطهاة الدوليين الحائزين على جوائز عالمية، ممتدين بخبرة عريقة تفوق الـ 15 عاماً في أرقى الفنادق والمطاعم العالمية. نحن لا نقدم مجرد وجبات، بل نصنع لوحات فنية ومذاقات ساحرة تأخذك في رحلة حول العالم.
-        </div>
-    </section>
-
-    <section class="menu" id="menu">
-        <h2 class="section-title lang-text" data-ar="قائمة الأطباق الفاخرة" data-fr="Le Menu Prestige" data-en="The Prestige Menu">قائمة الأطباق الفاخرة</h2>
-        <p class="section-subtitle lang-text" data-ar="مختارات حصرية من أشهر الأطباق العالمية المجهزة بحرفية" data-fr="Une sélection exclusive de plats mondiaux" data-en="An exclusive selection of meticulously prepared global dishes">مختارات حصرية من أشهر الأطباق العالمية المجهزة بحرفية</p>
-        
-        <div class="menu-grid">
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
-                <div class="menu-body">
-                    <h3 class="lang-text" data-ar="ستيك تندرلوين الفاخر" data-fr="Filet de Mignon Deluxe" data-en="Premium Tenderloin Steak">ستيك تندرلوين الفاخر</h3>
-                    <p class="lang-text" data-ar="لحم بقري أنجوس مشوي مع صلصة الترافل السوداء الفاخرة وهريس البطاطس الناعم." data-fr="Bœuf Angus grillé avec sauce aux truffes noires." data-en="Grilled Angus beef served with premium black truffle sauce.">لحم بقري أنجوس مشوي مع صلصة الترافل السوداء الفاخرة وهريس البطاطس الناعم.</p>
-                    <div class="menu-meta"><span class="price">$45.00</span></div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
-                <div class="menu-body">
-                    <h3 class="lang-text" data-ar="سالمون ملكي مشوي" data-fr="Saumon Royal Grillé" data-en="Grilled Royal Salmon">سالمون ملكي مشوي</h3>
-                    <p class="lang-text" data-ar="شريحة سالمون بري طازج مع صلصة الليمون والشبت الساحرة وهليون مشوي." data-fr="Pavé de saumon sauvage frais avec sauce au citron." data-en="Fresh wild salmon fillet served with zesty lemon-dill sauce.">شريحة سالمون بري طازج مع صلصة الليمون والشبت الساحرة وهليون مشوي.</p>
-                    <div class="menu-meta"><span class="price">$38.00</span></div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
-                <div class="menu-body">
-                    <h3 class="lang-text" data-ar="باستا المأكولات البحرية" data-fr="Pâtes aux Fruits de Mer" data-en="Seafood Tagliatelle">باستا المأكولات البحرية</h3>
-                    <p class="lang-text" data-ar="باستا طازجة غنية بالروبيان، الكالماري، والمحار المطبوخ بصلصة الطماطم الصقلية." data-fr="Pâtes fraîches riches en crevettes et calmars." data-en="Fresh pasta loaded with shrimp and calamari.">باستا طازجة غنية بالروبيان، الكالماري، والمحار المطبوخ بصلصة الطماطم الصقلية.</p>
-                    <div class="menu-meta"><span class="price">$34.00</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="raw-materials" id="materials">
-        <h2 class="section-title lang-text" data-ar="المواد الخام والجودة أولاً" data-fr="Matières Premières" data-en="Premium Ingredients">المواد الخام والجودة أولاً</h2>
-        <div class="materials-grid">
-            <div class="material-card">
-                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" alt="Veggies">
-                <h4 class="lang-text" data-ar="خضار عضوية طازجة" data-fr="Légumes Bio" data-en="Organic Veggies">خضار عضوية طازجة</h4>
-            </div>
-            <div class="material-card">
-                <img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=400&q=80" alt="Meat">
-                <h4 class="lang-text" data-ar="لحوم ممتازة ومعتمدة" data-fr="Viandes Sélectionnées" data-en="Premium Meats">لحوم ممتازة ومعتمدة</h4>
-            </div>
-            <div class="material-card">
-                <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80" alt="Spices">
-                <h4 class="lang-text" data-ar="توابل وأعشاب نادرة" data-fr="Épices Rares" data-en="Rare Spices">توابل وأعشاب نادرة</h4>
-            </div>
-        </div>
-    </section>
-
-    <section class="booking" id="booking">
-        <h2 class="section-title lang-text" data-ar="احجز طاولتك الفاخرة" data-fr="Réservez Votre Table" data-en="Book Your Luxury Table">احجز طاولتك الفاخرة</h2>
-        <p class="section-subtitle lang-text" data-ar="اضمن مكانك بين النخبة واستمتع بأمسية لا مثيل لها" data-fr="Assurez votre place pour une soirée mémorable" data-en="Secure your spot among the elite">اضمن مكانك بين النخبة واستمتع بأمسية لا مثيل لها</p>
-        <button class="btn-gold lang-text" id="openBookingBtn" data-ar="احجز طاولتك الآن" data-fr="Réserver Maintenant" data-en="Book Table Now">احجز طاولتك الآن</button>
-    </section>
-
-    <section class="testimonials" id="testimonials">
-        <h2 class="section-title lang-text" data-ar="آراء ضيوف النخبة" data-fr="Avis de nos Clients" data-en="Guest Testimonials">آراء ضيوف النخبة</h2>
-        <div class="testimonials-grid">
-            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— أفضل تجربة ستيك تندرلوين تذوقتها في حياتي!</p><div class="testi-author">أحمد العمراني</div></div>
-            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— المكان يجمع بين الفخامة والخصوصية المطلقة.</p><div class="testi-author">سارة بن جلون</div></div>
-            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— الريزوتو هنا لا يُعلى عليه، طعم إيطالي أصيل.</p><div class="testi-author">د. محمد التازي</div></div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4 id="footer-logo">مطعم الفخامة</h4>
-                <p class="lang-text" data-ar="وجهتك الأولى لتذوق الفخامة والرقي." data-fr="Votre destination pour le luxe culinaire." data-en="Your destination for luxury culinary.">وجهتك الأولى لتذوق الفخامة والرقي.</p>
-            </div>
-            <div class="footer-col">
-                <h4 class="lang-text" data-ar="اتصل بنا" data-fr="Contactez-nous" data-en="Contact Us">اتصل بنا</h4>
-                <p><a href="mailto:contact@luxuryrestaurant.com">contact@luxuryrestaurant.com</a></p>
-                <p>الهاتف: 0522001122</p>
-            </div>
-            <div class="footer-col">
-                <h4 class="lang-text" data-ar="الموقع" data-fr="Localisation" data-en="Location">الموقع</h4>
-                <p class="lang-text" data-ar="شارع النخيل، الدار البيضاء، المغرب" data-fr="Casablanca, Maroc" data-en="Casablanca, Morocco">شارع النخيل، الدار البيضاء، المغرب</p>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2026 مطعم الفخامة. تم التطوير بواسطة بسمة ويب</p>
-        </div>
-    </footer>
-
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="smart-modal">
-            <span class="close-btn" id="closeModalBtn">&times;</span>
-            <div style="font-size: 50px; margin-bottom: 15px;">✨</div>
-            <h3 id="modalTitle">جاري تحميل النظام...</h3>
-            <p id="modalMessage">أهلاً بك!</p>
-            
-            <div class="info-box">
-                <span class="lang-text" data-ar="لغة التصفح الحالية:" data-fr="Langue actuelle:" data-en="Current Language:">لغة التصفح الحالية:</span>
-                <span class="info-tag" id="userLanguage">-</span>
-            </div>
-
-            <div class="info-box">
-                <span class="lang-text" data-ar="سرعة التصفح الحالية:" data-fr="Vitesse Internet:" data-en="Browsing Speed:">سرعة التصفح الحالية:</span>
-                <span class="info-tag" id="connectionSpeed">جاري القياس...</span>
-            </div>
-
-            <button class="btn-gold lang-text" style="width:100%; border-radius:10px;" data-ar="متابعة عملية الحجز" data-fr="Continuer" data-en="Continue Booking">متابعة عملية الحجز</button>
-        </div>
-    </div>
-
-    <script>
-        let currentLang = 'ar';
-
-        // ربط القائمة المنسدلة بدالة تغيير اللغة
-        document.getElementById('languageSelect').addEventListener('change', function() {
-            changeLanguage(this.value);
-        });
-
-        function changeLanguage(lang) {
-            currentLang = lang;
-            const body = document.body;
-            const logo = document.getElementById('logo-text');
-            const footerLogo = document.getElementById('footer-logo');
-
-            if (currentLang === 'ar') {
-                body.classList.remove('ltr'); 
-                body.dir = 'rtl'; 
-                body.lang = 'ar';
-                logo.textContent = "مطعم الفخامة";
-                footerLogo.textContent = "مطعم الفخامة";
-            } else if (currentLang === 'fr') {
-                body.classList.add('ltr'); 
-                body.dir = 'ltr'; 
-                body.lang = 'fr';
-                logo.textContent = "Restaurant L'Élite";
-                footerLogo.textContent = "Restaurant L'Élite";
-            } else if (currentLang === 'en') {
-                body.classList.add('ltr'); 
-                body.dir = 'ltr'; 
-                body.lang = 'en';
-                logo.textContent = "Restaurant L'Élite";
-                footerLogo.textContent = "Restaurant L'Élite";
-            }
-
-            // تحديث كافة النصوص التي تحتوي على فئة lang-text
-            document.querySelectorAll('.lang-text').forEach(el => {
-                const text = el.getAttribute(data-${currentLang});
-                if (text) el.textContent = text;
-            });
-        }
-
-        const openBtn = document.getElementById('openBookingBtn');
-        const closeBtn = document.getElementById('closeModalBtn');
-        const overlay = document.getElementById('modalOverlay');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalMessage = document.getElementById('modalMessage');
-        const speedElement = document.getElementById('connectionSpeed');
-        const userLangElement = document.getElementById('userLanguage');
-
-        openBtn.addEventListener('click', () => {
-            overlay.classList.add('active');
-            userLangElement.textContent = currentLang.toUpperCase();
-
-            if (currentLang === 'ar') {
-                modalTitle.textContent = "نافذة الحجز الذكية";
-                modalMessage.textContent = "أهلاً بك في نظام مطعم الفخامة! تم رصد تصفحك باللغة العربية وسنقوم بتوفير أسرع استجابة لك.";
-            } else if (currentLang === 'fr') {
-                modalTitle.textContent = "Réservation Intelligente";
-                modalMessage.textContent = "Bienvenue dans le système L'Élite. Nous optimisons votre connexion en temps réel.";
-            } else {
-                modalTitle.textContent = "Smart Booking System";
-                modalMessage.textContent = "Welcome to L'Élite system. We are optimizing your premium reservation session now.";
-            }
-
-            if (navigator.connection) {
-                const speed = navigator.connection.downlink;
-                speedElement.textContent = speed >= 5 ? ${speed} Mbps (سريع جداً ⚡) : ${speed} Mbps (مستقر 🌐);
-            } else {
-                speedElement.textContent = "ممتازة (مستقرة ⚡)";
-            }
-        });
-
-        closeBtn.addEventListener('click', () => { overlay.classList.remove('active'); });
-        overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('active'); });
-    </script>
-</body>
-</html>
-Le message disparaîtra dans 23h
-23h
-Rédiger
-Écrire à Niso Zardos
+        <p class="section
