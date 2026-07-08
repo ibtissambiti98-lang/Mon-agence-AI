@@ -3,261 +3,528 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>احجز طاولتك - نافذة ذكية</title>
+    <title>ريستوران الفخامة | Restaurant L'Élite</title>
     <style>
-        /* إعدادات الخطوط والتنسيق العام */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap');
+
+        :root {
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-light: #ffffff;
+            --text-muted: #aaaaaa;
+            --transition: all 0.4s ease;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            box-sizing: border-box;
         }
 
-        /* تنسيق زر الحجز الأساسي */
-        .booking-btn {
-            background-color: #e67e22;
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
-            transition: all 0.3s ease;
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        .booking-btn:hover {
-            background-color: #d35400;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.6);
+        body.ltr {
+            direction: ltr;
+            font-family: 'Poppins', sans-serif;
+        }
+        body.ltr .nav-links {
+            margin-right: 0;
+            margin-left: auto;
+        }
+        body.ltr .nav-links a {
+            margin-right: 0;
+            margin-left: 25px;
+        }
+        body.ltr .about-content {
+            text-align: left;
         }
 
-        /* خلفية النافذة المنبثقة الذكية */
-        .modal-overlay {
+        header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px 8%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
             z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
-        /* النافذة الذكية المتحركة */
+        .logo {
+            font-family: 'Playfair Display', 'Cairo', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin-right: auto;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .lang-switcher {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 6px 14px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-left: 15px;
+        }
+        .lang-switcher:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', 'Cairo', serif;
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 35px;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+
+        .btn-gold {
+            background: linear-gradient(45deg, #d4af37, #aa7c11);
+            color: #000;
+            padding: 14px 36px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(214, 175, 55, 0.3);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #f3e5ab, #d4af37);
+        }
+
+        section {
+            padding: 100px 8% 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', 'Cairo', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+            margin: 15px auto 0 auto;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+        }
+
+        .about { background: #0f0f0f; }
+        .about-content {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #dddddd;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(214, 175, 55, 0.05);
+            transition: var(--transition);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(214, 175, 55, 0.3);
+        }
+
+        .menu-img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .menu-body { padding: 25px; }
+        .menu-body h3 { font-size: 1.3rem; margin-bottom: 10px; color: #fff;}
+        .menu-body p { color: var(--text-muted); font-size: 0.95rem; height: 50px; margin-bottom: 20px;}
+        .menu-meta { display: flex; justify-content: space-between; align-items: center; }
+        .price { color: var(--gold); font-weight: 700; font-size: 1.25rem; }
+
+        .raw-materials { background: #0f0f0f; }
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        .material-card {
+            text-align: center; background: var(--bg-dark); border-radius: 10px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .material-card img { width: 100%; height: 180px; object-fit: cover; }
+        .material-card h4 { padding: 15px 10px; color: var(--gold); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .testi-card {
+            background: var(--bg-card); padding: 30px; border-radius: 12px; border-left: 3px solid var(--gold);
+        }
+        .stars { color: var(--gold); margin-bottom: 15px; }
+        .testi-text { color: #dddddd; font-style: italic; margin-bottom: 15px; font-size: 0.95rem;}
+        .testi-author { color: var(--gold); font-weight: 600; }
+
+        .booking {
+            background: linear-gradient(rgba(10,10,10,0.9), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            text-align: center;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 2000;
+        }
+
         .smart-modal {
-            background-color: white;
-            padding: 30px;
+            background-color: #141414;
+            padding: 35px;
             border-radius: 20px;
             width: 90%;
-            max-width: 450px;
+            max-width: 480px;
             text-align: center;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border: 1px solid var(--gold);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
             transform: scale(0.7) translateY(-50px);
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             position: relative;
         }
 
-        /* تأثير ظهور النافذة بشكل ذكي ومتحرك */
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-overlay.active .smart-modal { transform: scale(1) translateY(0); }
 
-        .modal-overlay.active .smart-modal {
-            transform: scale(1) translateY(0);
-        }
-
-        /* زر إغلاق النافذة */
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #888;
-            transition: color 0.2s;
-        }
-
-        .close-btn:hover {
-            color: #333;
-        }
-
-        /* أيقونة متحركة داخل النافذة */
-        .modal-icon {
-            font-size: 50px;
-            color: #2ecc71;
-            margin-bottom: 15px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        h3 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-
-        /* أقسام البيانات الذكية (اللغة والسرعة) */
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 26px; cursor: pointer; color: var(--gold); }
         .info-box {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 10px;
-            padding: 12px;
-            margin: 15px 0;
-            font-size: 15px;
-            color: #495057;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: #1a1a1a; border: 1px solid rgba(214,175,55,0.2);
+            border-radius: 10px; padding: 12px; margin: 15px 0; font-size: 14px;
+            display: flex; justify-content: space-between; align-items: center;
         }
+        .info-tag { font-weight: bold; color: var(--gold); }
 
-        .info-tag {
-            font-weight: bold;
-            color: #3498db;
+        footer {
+            background: #050505; padding: 60px 8% 30px 8%; border-top: 1px solid rgba(214, 175, 55, 0.1);
         }
-
-        /* زر تأكيد الحجز الداخلي */
-        .confirm-btn {
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        .confirm-btn:hover {
-            background-color: #27ae60;
-        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;}
+        .footer-col h4 { color: var(--gold); margin-bottom: 20px; font-family: 'Playfair Display', serif;}
+        .footer-col p { color: var(--text-muted); line-height: 1.8; margin-bottom: 10px;}
+        .footer-col a { color: var(--text-muted); text-decoration: none;}
+        .footer-col a:hover { color: var(--gold); }
+        .copyright { text-align: center; color: #444; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;}
     </style>
 </head>
 <body>
 
-    <!-- زر احجز طاولتك الأساسي -->
-    <button class="booking-btn" id="openBookingBtn">احجز طاولتك الآن</button>
+    <header>
+        <a href="#" class="logo" id="logo-text">ريستوران الفخامة</a>
+        <ul class="nav-links">
+            <li><a href="#about" class="lang-text" data-ar="من نحن" data-fr="À Propos" data-en="About Us">من نحن</a></li>
+            <li><a href="#menu" class="lang-text" data-ar="القائمة" data-fr="Menu" data-en="Menu">القائمة</a></li>
+            <li><a href="#materials" class="lang-text" data-ar="جودتنا" data-fr="Qualité" data-en="Our Quality">جودتنا</a></li>
+            <li><a href="#booking" class="lang-text" data-ar="احجز طاولتك" data-fr="Réservation" data-en="Book Table">احجز طاولتك</a></li>
+            <li><a href="#testimonials" class="lang-text" data-ar="آراء العملاء" data-fr="Avis" data-en="Reviews">آراء العملاء</a></li>
+        </ul>
+        <button class="lang-switcher" onclick="toggleLanguage()">English</button>
+    </header>
 
-    <!-- هيكل النافذة الذكية المتحركة -->
+    <section class="hero" id="home">
+        <h1 id="hero-title" class="lang-text" data-ar="ريستوران الفخامة" data-fr="Restaurant L'Élite" data-en="Restaurant L'Élite">ريستوران الفخامة</h1>
+        <p id="hero-desc" class="lang-text" 
+           data-ar="تجربة طهي ملكية فريدة تجمع بين النكهات العالمية الساحرة والأجواء العصرية الراقية." 
+           data-fr="Une expérience culinaire royale combinant des saveurs internationales captivantes et une atmosphère moderne." 
+           data-en="A royal culinary experience combining captivating international flavors and a refined modern atmosphere.">
+           تجربة طهي ملكية فريدة تجمع بين النكهات العالمية الساحرة والأجواء العصرية الراقية.
+        </p>
+        <a href="#booking" class="btn-gold lang-text" data-ar="احجز طاولتك الآن" data-fr="Réserver une Table" data-en="Book a Table Now">احجز طاولتك الآن</a>
+    </section>
+
+    <section class="about" id="about">
+        <h2 class="section-title lang-text" data-ar="قصة الفخامة والخبرة" data-fr="Notre Histoire" data-en="Our Story">قصة الفخامة والخبرة</h2>
+        <p class="section-subtitle lang-text" data-ar="شغف ممتد لسنوات لتقديم الأفضل" data-fr="Un savoir-faire d'excellence" data-en="Years of excellence and passion">شغف ممتد لسنوات لتقديم الأفضل</p>
+        <div class="about-content lang-text" 
+             data-ar="تأسس مطعمنا على يد نخبة من أمهر الطهاة الدوليين الحائزين على جوائز عالمية، ممتدين بخبرة عريقة تفوق الـ 15 عاماً في أرقى الفنادق والمطاعم العالمية. نحن لا نقدم مجرد وجبات، بل نصنع لوحات فنية ومذاقات ساحرة تأخذك في رحلة حول العالم."
+             data-fr="Notre restaurant a été fondé par une élite de chefs internationaux primés, dotés d'une expérience de plus de 15 ans dans les plus prestigieux hôtels. Nous créons des chefs-d'œuvre gustatifs uniques."
+             data-en="Our restaurant was founded by an elite group of award-winning international chefs, with over 15 years of culinary experience in the world’s finest luxury hotels. We create sensory masterpieces.">
+             تأسس مطعمنا على يد نخبة من أمهر الطهاة الدوليين الحائزين على جوائز عالمية، ممتدين بخبرة عريقة تفوق الـ 15 عاماً في أرقى الفنادق والمطاعم العالمية. نحن لا نقدم مجرد وجبات، بل نصنع لوحات فنية ومذاقات ساحرة تأخذك في رحلة حول العالم.
+        </div>
+    </section>
+
+    <section class="menu" id="menu">
+        <h2 class="section-title lang-text" data-ar="قائمة الأطباق الفاخرة" data-fr="Le Menu Prestige" data-en="The Prestige Menu">قائمة الأطباق الفاخرة</h2>
+        <p class="section-subtitle lang-text" data-ar="مختارات حصرية من أشهر الأطباق العالمية المجهزة بحرفية" data-fr="Une sélection exclusive de plats mondiaux" data-en="An exclusive selection of meticulously prepared global dishes">مختارات حصرية من أشهر الأطباق العالمية المجهزة بحرفية</p>
+        
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
+                <div class="menu-body">
+                    <h3 class="lang-text" data-ar="ستيك تندرلوين الفاخر" data-fr="Filet de Mignon Deluxe" data-en="Premium Tenderloin Steak">ستيك تندرلوين الفاخر</h3>
+                    <p class="lang-text" data-ar="لحم بقري أنجوس مشوي مع صلصة الترافل السوداء الفاخرة وهريس البطاطس الناعم." data-fr="Bœuf Angus grillé avec sauce aux truffes noires." data-en="Grilled Angus beef served with premium black truffle sauce.">لحم بقري أنجوس مشوي مع صلصة الترافل السوداء الفاخرة وهريس البطاطس الناعم.</p>
+                    <div class="menu-meta"><span class="price">$45.00</span></div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
+                <div class="menu-body">
+                    <h3 class="lang-text" data-ar="سالمون ملكي مشوي" data-fr="Saumon Royal Grillé" data-en="Grilled Royal Salmon">سالمون ملكي مشوي</h3>
+                    <p class="lang-text" data-ar="شريحة سالمون بري طازج مع صلصة الليمون والشبت الساحرة وهليون مشوي." data-fr="Pavé de saumon sauvage frais avec sauce au citron." data-en="Fresh wild salmon fillet served with zesty lemon-dill sauce.">شريحة سالمون بري طازج مع صلصة الليمون والشبت الساحرة وهليون مشوي.</p>
+                    <div class="menu-meta"><span class="price">$38.00</span></div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
+                <div class="menu-body">
+                    <h3 class="lang-text" data-ar="باستا المأكولات البحرية" data-fr="Pâtes aux Fruits de Mer" data-en="Seafood Tagliatelle">باستا المأكولات البحرية</h3>
+                    <p class="lang-text" data-ar="باستا طازجة غنية بالروبيان، الكالماري، والمحار المطبوخ بصلصة الطماطم الصقلية." data-fr="Pâtes fraîches riches en crevettes et calmars." data-en="Fresh pasta loaded with shrimp and calamari.">باستا طازجة غنية بالروبيان، الكالماري، والمحار المطبوخ بصلصة الطماطم الصقلية.</p>
+                    <div class="menu-meta"><span class="price">$34.00</span></div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
+                <div class="menu-body">
+                    <h3 class="lang-text" data-ar="ريزوتو الفطر البري" data-fr="Risotto aux Truffes" data-en="Wild Mushroom Risotto">ريزوتو الفطر البري</h3>
+                    <p class="lang-text" data-ar="أرز كارنارولي إيطالي مطبوخ ببطء مع مرق الفطر الغني وجبن البارميزان المعتق." data-fr="Riz italien Carnaroli cuit lentement au bouillon." data-en="Italian Carnaroli rice slowly cooked with rich mushroom broth.">أرز كارنارولي إيطالي مطبوخ ببطء مع مرق الفطر الغني وجبن البارميزان المعتق.</p>
+                    <div class="menu-meta"><span class="price">$29.00</span></div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1514944288352-fffac99f0bdf?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
+                <div class="menu-body">
+                    <h3 class="lang-text" data-ar="صدر البط المشوي الفاخر" data-fr="Canard Rôti Suprême" data-en="Glazed Roasted Duck Breast">صدر البط المشوي الفاخر</h3>
+                    <p class="lang-text" data-ar="صدر بط مكرمل بصلصة البرتقال والتوت البري يقدم مع خضار موسمية مشوية." data-fr="Magret de canard caramélisé au coulis d'orange." data-en="Caramelized duck breast served with orange reduction.">صدر بط مكرمل بصلصة البرتقال والتوت البري يقدم مع خضار موسمية مشوية.</p>
+                    <div class="menu-meta"><span class="price">$42.00</span></div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
+                <div class="menu-body">
+                    <h3 class="lang-text" data-ar="أضلاع الغنم بالروزماري" data-fr="Carré d'Agneau au Romarin" data-en="Rosemary Lamb Chops">أضلاع الغنم بالروزماري</h3>
+                    <p class="lang-text" data-ar="أضلاع غنم متبلة ومحمرة بالأعشاب البرية الثمينة وصلصة الروزماري الغنية." data-fr="Côtelettes d'agneau rôties aux herbes sauvages." data-en="Tender lamb chops crusted with wild herbs.">أضلاع غنم متبلة ومحمرة بالأعشاب البرية الثمينة وصلصة الروزماري الغنية.</p>
+                    <div class="menu-meta"><span class="price">$48.00</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="raw-materials" id="materials">
+        <h2 class="section-title lang-text" data-ar="المواد الخام والجودة أولاً" data-fr="Matières Premières" data-en="Premium Ingredients">المواد الخام والجودة أولاً</h2>
+        <div class="materials-grid">
+            <div class="material-card">
+                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" alt="Veggies">
+                <h4 class="lang-text" data-ar="خضار عضوية طازجة" data-fr="Légumes Bio" data-en="Organic Veggies">خضار عضوية طازجة</h4>
+            </div>
+            <div class="material-card">
+                <img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=400&q=80" alt="Meat">
+                <h4 class="lang-text" data-ar="لحوم ممتازة ومعتمدة" data-fr="Viandes Sélectionnées" data-en="Premium Meats">لحوم ممتازة ومعتمدة</h4>
+            </div>
+            <div class="material-card">
+                <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80" alt="Spices">
+                <h4 class="lang-text" data-ar="توابل وأعشاب نادرة" data-fr="Épices Rares" data-en="Rare Spices">توابل وأعشاب نادرة</h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="booking" id="booking">
+        <h2 class="section-title lang-text" data-ar="احجز طاولتك الفاخرة" data-fr="Réservez Votre Table" data-en="Book Your Luxury Table">احجز طاولتك الفاخرة</h2>
+        <p class="section-subtitle lang-text" data-ar="اضمن مكانك بين النخبة واستمتع بأمسية لا مثيل لها" data-fr="Assurez votre place pour une soirée mémorable" data-en="Secure your spot among the elite">اضمن مكانك بين النخبة واستمتع بأمسية لا مثيل لها</p>
+        <button class="btn-gold lang-text" id="openBookingBtn" data-ar="احجز طاولتك الآن" data-fr="Réserver Maintenant" data-en="Book Table Now">احجز طاولتك الآن</button>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title lang-text" data-ar="آراء ضيوف النخبة" data-fr="Avis de nos Clients" data-en="Guest Testimonials">آراء ضيوف النخبة</h2>
+        <div class="testimonials-grid">
+            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— أفضل تجربة ستيك تندرلوين تذوقتها في حياتي!</p><div class="testi-author">أحمد العمراني</div></div>
+            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— المكان يجمع بين الفخامة والخصوصية المطلقة.</p><div class="testi-author">سارة بن جلون</div></div>
+            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— الريزوتو هنا لا يُعلى عليه، طعم إيطالي أصيل.</p><div class="testi-author">د. محمد التازي</div></div>
+            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— أطباق مميزة ومواد خام واضحة الجودة والطزاجة.</p><div class="testi-author">ليلى المترجي</div></div>
+            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— حجزت طاولة لعشاء عمل وكان التنظيم والهدوء فوق الخيال.</p><div class="testi-author">كريم الودغيري</div></div>
+            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— الحلويات والأطباق البحرية مذهلة ولها لمسة فنية فريدة.</p><div class="testi-author">ياسمين التازي</div></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>ريستوران الفخامة</h4>
+                <p class="lang-text" data-ar="وجهتك الأولى لتذوق الفخامة والرقي." data-fr="Votre destination pour le luxe culinaire." data-en="Your destination for luxury culinary.">وجهتك الأولى لتذوق الفخامة والرقي.</p>
+            </div>
+            <div class="footer-col">
+                <h4 class="lang-text" data-ar="اتصل بنا" data-fr="Contactez-nous" data-en="Contact Us">اتصل بنا</h4>
+                <p><a href="mailto:contact@luxuryrestaurant.com">contact@luxuryrestaurant.com</a></p>
+                <p>الهاتف: 0522001122</p>
+            </div>
+            <div class="footer-col">
+                <h4 class="lang-text" data-ar="الموقع" data-fr="Localisation" data-en="Location">الموقع</h4>
+                <p class="lang-text" data-ar="شارع النخيل، الدار البيضاء، المغرب" data-fr="Casablanca, Maroc" data-en="Casablanca, Morocco">شارع النخيل، الدار البيضاء، المغرب</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 ريستوران الفخامة. تم التطوير بواسطة بسمة ويب</p>
+        </div>
+    </footer>
+
     <div class="modal-overlay" id="modalOverlay">
         <div class="smart-modal">
             <span class="close-btn" id="closeModalBtn">&times;</span>
-            <div class="modal-icon">✨</div>
-            <h3 id="modalTitle">جاري تحميل النظام الذكي...</h3>
-            <p id="modalMessage">أهلاً بك! نحن نجهز لك أفضل تجربة حجز.</p>
+            <div style="font-size: 50px; margin-bottom: 15px;">✨</div>
+            <h3 id="modalTitle">جاري تحميل النظام...</h3>
+            <p id="modalMessage">أهلاً بك!</p>
             
-            <!-- صندوق عرض لغة التصفح -->
             <div class="info-box">
-                <span>لغة التصفح الحالية:</span>
+                <span class="lang-text" data-ar="لغة التصفح الحالية:" data-fr="Langue actuelle:" data-en="Current Language:">لغة التصفح الحالية:</span>
                 <span class="info-tag" id="userLanguage">-</span>
             </div>
 
-            <!-- صندوق عرض سرعة التصفح الإلكتروني -->
             <div class="info-box">
-                <span>سرعة اتصالك الحالية:</span>
+                <span class="lang-text" data-ar="سرعة التصفح الحالية:" data-fr="Vitesse Internet:" data-en="Browsing Speed:">سرعة التصفح الحالية:</span>
                 <span class="info-tag" id="connectionSpeed">جاري القياس...</span>
             </div>
 
-            <button class="confirm-btn">متابعة عملية الحجز</button>
+            <button class="btn-gold lang-text" style="width:100%; border-radius:10px;" data-ar="متابعة عملية الحجز" data-fr="Continuer" data-en="Continue Booking">متابعة عملية الحجز</button>
         </div>
     </div>
 
     <script>
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            const body = document.body;
+            const btn = document.querySelector('.lang-switcher');
+            const logo = document.getElementById('logo-text');
+
+            if (currentLang === 'ar') {
+                currentLang = 'fr'; body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'fr';
+                btn.textContent = 'English'; logo.textContent = "Restaurant L'Élite";
+            } else if (currentLang === 'fr') {
+                currentLang = 'en'; body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'en';
+                btn.textContent = 'العربية'; logo.textContent = "Restaurant L'Élite";
+            } else {
+                currentLang = 'ar'; body.classList.remove('ltr'); body.dir = 'rtl'; body.lang = 'ar';
+                btn.textContent = 'French'; logo.textContent = "ريستوران الفخامة";
+            }
+
+            document.querySelectorAll('.lang-text').forEach(el => {
+                const text = el.getAttribute(data-${currentLang});
+                if (text) el.textContent = text;
+            });
+        }
+
         const openBtn = document.getElementById('openBookingBtn');
         const closeBtn = document.getElementById('closeModalBtn');
         const overlay = document.getElementById('modalOverlay');
-
-        // عناصر تحديث البيانات ديناميكياً
         const modalTitle = document.getElementById('modalTitle');
         const modalMessage = document.getElementById('modalMessage');
-        const userLangElement = document.getElementById('userLanguage');
         const speedElement = document.getElementById('connectionSpeed');
+        const userLangElement = document.getElementById('userLanguage');
 
-        // فتح النافذة وتشغيل الخوارزمية الذكية
         openBtn.addEventListener('click', () => {
             overlay.classList.add('active');
-            runSmartFeatures();
-        });
+            userLangElement.textContent = currentLang.toUpperCase();
 
-        // إغلاق النافذة عند الضغط على زر الإغلاق
-        closeBtn.addEventListener('click', () => {
-            overlay.classList.remove('active');
-        });
-
-        // إغلاق النافذة عند الضغط على أي مكان خارجها
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) {
-                overlay.classList.remove('active');
-            }
-        });
-
-        // الدالة الذكية لتحليل لغة وسرعة المتصفح لتجربة مدهشة للعملاء
-        function runSmartFeatures() {
-            // 1. جلب لغة المتصفح الحالية وتخصيص النصوص بناءً عليها
-            const browserLang = navigator.language || navigator.userLanguage;
-            userLangElement.textContent = browserLang.toUpperCase();
-
-            if (browserLang.startsWith('ar')) {
+            if (currentLang === 'ar') {
                 modalTitle.textContent = "نافذة الحجز الذكية";
-                modalMessage.textContent = "لقد لاحظنا أنك تتصفح موقعنا باللغة العربية، أهلاً بك في نظامنا المطور!";
-            } else if (browserLang.startsWith('fr')) {
-                modalTitle.textContent = "Réservation Inteligente";
-                modalMessage.textContent = "Nous avons détecté que vous naviguez en Français. Bienvenue!";
+                modalMessage.textContent = "أهلاً بك في نظام ريستوران الفخامة! تم رصد تصفحك باللغة العربية وسنقوم بتوفير أسرع استجابة لك.";
+            } else if (currentLang === 'fr') {
+                modalTitle.textContent = "Réservation Intelligente";
+                modalMessage.textContent = "Bienvenue dans le système L'Élite. Nous optimisons votre connexion en temps réel.";
             } else {
                 modalTitle.textContent = "Smart Booking System";
-                modalMessage.textContent = "We noticed you are browsing in English. Welcome to our premium system!";
+                modalMessage.textContent = "Welcome to L'Élite system. We are optimizing your premium reservation session now.";
             }
 
-            // 2. قياس وعرض سرعة التصفح (الإنترنت) الخاصة بالعميل
             if (navigator.connection) {
-                const speedMbps = navigator.connection.downlink; // قياس سرعة التحميل بالميجابت
-                const rttTime = navigator.connection.rtt; // قياس زمن الاستجابة بالملي ثانية
-                
-                let speedStatus = "";
-                if (speedMbps >= 5) {
-                    speedStatus = ${speedMbps} Mbps (سريع جداً ⚡);
-                } else if (speedMbps >= 2) {
-                    speedStatus = ${speedMbps} Mbps (مستقر 🌐);
-                } else {
-                    speedStatus = ${speedMbps} Mbps (بطيء نسبيًا ⏳);
-                }
-                speedElement.textContent = speedStatus;
+                const speed = navigator.connection.downlink;
+                speedElement.textContent = speed >= 5 ? ${speed} Mbps (سريع جداً ⚡) : ${speed} Mbps (مستقر 🌐);
             } else {
-                // حل بديل ذكي في حال لم يكن المتصفح يدعم خاصية Connection API بشكل مباشر
-                const startTime = performance.now();
-                // نقوم بعمل طلب وهمي خفيف جداً لقياس سرعة الاستجابة اللحظية لتصفح الخادم
-                fetch('https://httpbin.org/get', { mode: 'cors' })
-                    .then(() => {
-                        const duration = (performance.now() - startTime).toFixed(0);
-                        if (duration < 300) {
-                            speedElement.textContent = ممتازة (${duration}ms);
-                        } else {
-                            speedElement.textContent = متوسطة (${duration}ms);
-                        }
-                    })
-                    .catch(() => {
-                        speedElement.textContent = "متصل (جيد)";
-                    });
+                speedElement.textContent = "ممتازة (مستقرة ⚡)";
             }
-        }
+        });
+
+        closeBtn.addEventListener('click', () => { overlay.classList.remove('active'); });
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('active'); });
     </script>
 </body>
 </html>
