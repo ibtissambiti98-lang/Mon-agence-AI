@@ -105,13 +105,27 @@
             transition: var(--transition);
             margin-left: 15px;
             font-family: 'Cairo', 'Poppins', sans-serif;
+            appearance: none; /* إخفاء السهم الافتراضي للمتصفح */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            padding-right: 35px; /* مساحة للسهم */
+        }
+        body.ltr .lang-dropdown {
+            margin-left: 0;
+            margin-right: 15px;
         }
         .lang-dropdown option {
             background-color: var(--bg-card);
             color: var(--text-light);
         }
-        .lang-dropdown:hover {
-            background: rgba(212, 175, 55, 0.1);
+        .lang-dropdown:hover, .lang-dropdown:focus {
+            background-color: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold-hover);
+            color: var(--gold-hover);
         }
 
         .hero {
@@ -315,8 +329,8 @@
             <li><a href="#testimonials" class="lang-text" data-ar="آراء العملاء" data-fr="Avis" data-en="Reviews">آراء العملاء</a></li>
         </ul>
         
-        <!-- القائمة المنسدلة للغات الثلاث المستقرة والجديدة -->
-        <select class="lang-dropdown" onchange="changeLanguage(this.value)">
+        <!-- القائمة المنسدلة للغات -->
+        <select id="languageSelect" class="lang-dropdown">
             <option value="ar">العربية</option>
             <option value="fr">Français</option>
             <option value="en">English</option>
@@ -455,6 +469,11 @@
     <script>
         let currentLang = 'ar';
 
+        // ربط القائمة المنسدلة بدالة تغيير اللغة
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            changeLanguage(this.value);
+        });
+
         function changeLanguage(lang) {
             currentLang = lang;
             const body = document.body;
@@ -462,15 +481,21 @@
             const footerLogo = document.getElementById('footer-logo');
 
             if (currentLang === 'ar') {
-                body.classList.remove('ltr'); body.dir = 'rtl'; body.lang = 'ar';
+                body.classList.remove('ltr'); 
+                body.dir = 'rtl'; 
+                body.lang = 'ar';
                 logo.textContent = "مطعم الفخامة";
                 footerLogo.textContent = "مطعم الفخامة";
             } else if (currentLang === 'fr') {
-                body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'fr';
+                body.classList.add('ltr'); 
+                body.dir = 'ltr'; 
+                body.lang = 'fr';
                 logo.textContent = "Restaurant L'Élite";
                 footerLogo.textContent = "Restaurant L'Élite";
             } else if (currentLang === 'en') {
-                body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'en';
+                body.classList.add('ltr'); 
+                body.dir = 'ltr'; 
+                body.lang = 'en';
                 logo.textContent = "Restaurant L'Élite";
                 footerLogo.textContent = "Restaurant L'Élite";
             }
@@ -518,3 +543,7 @@
     </script>
 </body>
 </html>
+Le message disparaîtra dans 23h
+23h
+Rédiger
+Écrire à Niso Zardos
