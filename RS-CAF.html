@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ريستوران الفخامة | Restaurant L'Élite</title>
+    <title>مطعم الفخامة | Restaurant L'Élite</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap');
 
@@ -91,21 +91,27 @@
             color: var(--gold);
         }
 
-        .lang-switcher {
+        /* تصميم القائمة المنسدلة للغات */
+        .lang-dropdown {
             background: transparent;
             border: 1px solid var(--gold);
             color: var(--gold);
-            padding: 6px 14px;
+            padding: 8px 12px;
             font-size: 14px;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
+            outline: none;
             transition: var(--transition);
             margin-left: 15px;
+            font-family: 'Cairo', 'Poppins', sans-serif;
         }
-        .lang-switcher:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
+        .lang-dropdown option {
+            background-color: var(--bg-card);
+            color: var(--text-light);
+        }
+        .lang-dropdown:hover {
+            background: rgba(212, 175, 55, 0.1);
         }
 
         .hero {
@@ -300,7 +306,7 @@
 <body>
 
     <header>
-        <a href="#" class="logo" id="logo-text">ريستوران الفخامة</a>
+        <a href="#" class="logo" id="logo-text">مطعم الفخامة</a>
         <ul class="nav-links">
             <li><a href="#about" class="lang-text" data-ar="من نحن" data-fr="À Propos" data-en="About Us">من نحن</a></li>
             <li><a href="#menu" class="lang-text" data-ar="القائمة" data-fr="Menu" data-en="Menu">القائمة</a></li>
@@ -308,11 +314,17 @@
             <li><a href="#booking" class="lang-text" data-ar="احجز طاولتك" data-fr="Réservation" data-en="Book Table">احجز طاولتك</a></li>
             <li><a href="#testimonials" class="lang-text" data-ar="آراء العملاء" data-fr="Avis" data-en="Reviews">آراء العملاء</a></li>
         </ul>
-        <button class="lang-switcher" onclick="toggleLanguage()">English</button>
+        
+        <!-- القائمة المنسدلة للغات الثلاث المستقرة والجديدة -->
+        <select class="lang-dropdown" onchange="changeLanguage(this.value)">
+            <option value="ar">العربية</option>
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+        </select>
     </header>
 
     <section class="hero" id="home">
-        <h1 id="hero-title" class="lang-text" data-ar="ريستوران الفخامة" data-fr="Restaurant L'Élite" data-en="Restaurant L'Élite">ريستوران الفخامة</h1>
+        <h1 id="hero-title" class="lang-text" data-ar="مطعم الفخامة" data-fr="Restaurant L'Élite" data-en="Restaurant L'Élite">مطعم الفخامة</h1>
         <p id="hero-desc" class="lang-text" 
            data-ar="تجربة طهي ملكية فريدة تجمع بين النكهات العالمية الساحرة والأجواء العصرية الراقية." 
            data-fr="Une expérience culinaire royale combinant des saveurs internationales captivantes et une atmosphère moderne." 
@@ -362,30 +374,6 @@
                     <div class="menu-meta"><span class="price">$34.00</span></div>
                 </div>
             </div>
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
-                <div class="menu-body">
-                    <h3 class="lang-text" data-ar="ريزوتو الفطر البري" data-fr="Risotto aux Truffes" data-en="Wild Mushroom Risotto">ريزوتو الفطر البري</h3>
-                    <p class="lang-text" data-ar="أرز كارنارولي إيطالي مطبوخ ببطء مع مرق الفطر الغني وجبن البارميزان المعتق." data-fr="Riz italien Carnaroli cuit lentement au bouillon." data-en="Italian Carnaroli rice slowly cooked with rich mushroom broth.">أرز كارنارولي إيطالي مطبوخ ببطء مع مرق الفطر الغني وجبن البارميزان المعتق.</p>
-                    <div class="menu-meta"><span class="price">$29.00</span></div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1514944288352-fffac99f0bdf?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
-                <div class="menu-body">
-                    <h3 class="lang-text" data-ar="صدر البط المشوي الفاخر" data-fr="Canard Rôti Suprême" data-en="Glazed Roasted Duck Breast">صدر البط المشوي الفاخر</h3>
-                    <p class="lang-text" data-ar="صدر بط مكرمل بصلصة البرتقال والتوت البري يقدم مع خضار موسمية مشوية." data-fr="Magret de canard caramélisé au coulis d'orange." data-en="Caramelized duck breast served with orange reduction.">صدر بط مكرمل بصلصة البرتقال والتوت البري يقدم مع خضار موسمية مشوية.</p>
-                    <div class="menu-meta"><span class="price">$42.00</span></div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=500&q=80" alt="Plat" class="menu-img">
-                <div class="menu-body">
-                    <h3 class="lang-text" data-ar="أضلاع الغنم بالروزماري" data-fr="Carré d'Agneau au Romarin" data-en="Rosemary Lamb Chops">أضلاع الغنم بالروزماري</h3>
-                    <p class="lang-text" data-ar="أضلاع غنم متبلة ومحمرة بالأعشاب البرية الثمينة وصلصة الروزماري الغنية." data-fr="Côtelettes d'agneau rôties aux herbes sauvages." data-en="Tender lamb chops crusted with wild herbs.">أضلاع غنم متبلة ومحمرة بالأعشاب البرية الثمينة وصلصة الروزماري الغنية.</p>
-                    <div class="menu-meta"><span class="price">$48.00</span></div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -419,16 +407,13 @@
             <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— أفضل تجربة ستيك تندرلوين تذوقتها في حياتي!</p><div class="testi-author">أحمد العمراني</div></div>
             <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— المكان يجمع بين الفخامة والخصوصية المطلقة.</p><div class="testi-author">سارة بن جلون</div></div>
             <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— الريزوتو هنا لا يُعلى عليه، طعم إيطالي أصيل.</p><div class="testi-author">د. محمد التازي</div></div>
-            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— أطباق مميزة ومواد خام واضحة الجودة والطزاجة.</p><div class="testi-author">ليلى المترجي</div></div>
-            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— حجزت طاولة لعشاء عمل وكان التنظيم والهدوء فوق الخيال.</p><div class="testi-author">كريم الودغيري</div></div>
-            <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">— الحلويات والأطباق البحرية مذهلة ولها لمسة فنية فريدة.</p><div class="testi-author">ياسمين التازي</div></div>
         </div>
     </section>
 
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>ريستوران الفخامة</h4>
+                <h4 id="footer-logo">مطعم الفخامة</h4>
                 <p class="lang-text" data-ar="وجهتك الأولى لتذوق الفخامة والرقي." data-fr="Votre destination pour le luxe culinaire." data-en="Your destination for luxury culinary.">وجهتك الأولى لتذوق الفخامة والرقي.</p>
             </div>
             <div class="footer-col">
@@ -442,7 +427,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2026 ريستوران الفخامة. تم التطوير بواسطة بسمة ويب</p>
+            <p>&copy; 2026 مطعم الفخامة. تم التطوير بواسطة بسمة ويب</p>
         </div>
     </footer>
 
@@ -470,22 +455,27 @@
     <script>
         let currentLang = 'ar';
 
-        function toggleLanguage() {
+        function changeLanguage(lang) {
+            currentLang = lang;
             const body = document.body;
-            const btn = document.querySelector('.lang-switcher');
             const logo = document.getElementById('logo-text');
+            const footerLogo = document.getElementById('footer-logo');
 
             if (currentLang === 'ar') {
-                currentLang = 'fr'; body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'fr';
-                btn.textContent = 'English'; logo.textContent = "Restaurant L'Élite";
+                body.classList.remove('ltr'); body.dir = 'rtl'; body.lang = 'ar';
+                logo.textContent = "مطعم الفخامة";
+                footerLogo.textContent = "مطعم الفخامة";
             } else if (currentLang === 'fr') {
-                currentLang = 'en'; body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'en';
-                btn.textContent = 'العربية'; logo.textContent = "Restaurant L'Élite";
-            } else {
-                currentLang = 'ar'; body.classList.remove('ltr'); body.dir = 'rtl'; body.lang = 'ar';
-                btn.textContent = 'French'; logo.textContent = "ريستوران الفخامة";
+                body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'fr';
+                logo.textContent = "Restaurant L'Élite";
+                footerLogo.textContent = "Restaurant L'Élite";
+            } else if (currentLang === 'en') {
+                body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'en';
+                logo.textContent = "Restaurant L'Élite";
+                footerLogo.textContent = "Restaurant L'Élite";
             }
 
+            // تحديث كافة النصوص التي تحتوي على فئة lang-text
             document.querySelectorAll('.lang-text').forEach(el => {
                 const text = el.getAttribute(data-${currentLang});
                 if (text) el.textContent = text;
@@ -506,7 +496,7 @@
 
             if (currentLang === 'ar') {
                 modalTitle.textContent = "نافذة الحجز الذكية";
-                modalMessage.textContent = "أهلاً بك في نظام ريستوران الفخامة! تم رصد تصفحك باللغة العربية وسنقوم بتوفير أسرع استجابة لك.";
+                modalMessage.textContent = "أهلاً بك في نظام مطعم الفخامة! تم رصد تصفحك باللغة العربية وسنقوم بتوفير أسرع استجابة لك.";
             } else if (currentLang === 'fr') {
                 modalTitle.textContent = "Réservation Intelligente";
                 modalMessage.textContent = "Bienvenue dans le système L'Élite. Nous optimisons votre connexion en temps réel.";
