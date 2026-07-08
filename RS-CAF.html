@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -327,7 +326,7 @@
             <li><a href="#testimonials" class="lang-text" data-ar="آراء العملاء" data-fr="Avis" data-en="Reviews">آراء العملاء</a></li>
         </ul>
         
-        <select id="languageSelect" class="lang-dropdown" onchange="changeLanguage(this.value)">
+        <select id="languageSelect" class="lang-dropdown">
             <option value="ar">العربية</option>
             <option value="fr">Français</option>
             <option value="en">English</option>
@@ -527,35 +526,50 @@
     </div>
 
     <script>
-        let currentLang = 'ar';
-
-        function changeLanguage(lang) {
-            currentLang = lang;
+        // دالة الترجمة المحسنة والآمنة
+        function executeLanguageChange(lang) {
             const body = document.body;
             const copyrightText = document.getElementById('copyright-text');
 
-            // 1. التحكم في اتجاه الصفحة وتحديث حقوق الملكية بشكل ديناميكي
-            if (currentLang === 'ar') {
-                body.classList.remove('ltr'); body.dir = 'rtl'; body.lang = 'ar';
+            // 1. تغيير اتجاه الصفحة وكلاسات التنسيق
+            if (lang === 'ar') {
+                body.classList.remove('ltr');
+                body.setAttribute('dir', 'rtl');
+                body.setAttribute('lang', 'ar');
                 if(copyrightText) copyrightText.innerHTML = "&copy; 2026 مطعم الفخامة. تم التطوير بواسطة بسمة ويب";
-            } else if (currentLang === 'fr') {
-                body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'fr';
+            } else if (lang === 'fr') {
+                body.classList.add('ltr');
+                body.setAttribute('dir', 'ltr');
+                body.setAttribute('lang', 'fr');
                 if(copyrightText) copyrightText.innerHTML = "&copy; 2026 Restaurant L'Élite. Développé par Basma Web";
-            } else if (currentLang === 'en') {
-                body.classList.add('ltr'); body.dir = 'ltr'; body.lang = 'en';
+            } else if (lang === 'en') {
+                body.classList.add('ltr');
+                body.setAttribute('dir', 'ltr');
+                body.setAttribute('lang', 'en');
                 if(copyrightText) copyrightText.innerHTML = "&copy; 2026 Restaurant L'Élite. Developed by Basma Web";
             }
 
-            // 2. تكرار حلقة الترجمة عبر كل العناصر التي تحمل كلاس النصوص المترجمة
-            document.querySelectorAll('.lang-text').forEach(el => {
-                const translatedText = el.getAttribute(data-${currentLang});
+            // 2. تحديث كافة النصوص الحاملة للكلاس الذكي
+            const elements = document.querySelectorAll('.lang-text');
+            elements.forEach(el => {
+                const translatedText = el.getAttribute('data-' + lang);
                 if (translatedText) {
                     el.textContent = translatedText;
                 }
             });
         }
 
-        // كود النوافذ المنبثقة وإدارة الحجز
+        // ربط الحدث بالقائمة المنسدلة بشكل آمن ومباشر لحل مشكلة التعطل
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageSelect = document.getElementById('languageSelect');
+            if (languageSelect) {
+                languageSelect.addEventListener('change', (event) => {
+                    executeLanguageChange(event.target.value);
+                });
+            }
+        });
+
+        // كود التحكم بالنوافذ المنبثقة
         const openBtn = document.getElementById('openBookingBtn');
         const closeBtn = document.getElementById('closeModalBtn');
         const overlay = document.getElementById('modalOverlay');
@@ -566,6 +580,7 @@
 
         if(openBtn) {
             openBtn.addEventListener('click', () => {
+                const currentLang = document.getElementById('languageSelect').value || 'ar';
                 if(overlay) overlay.classList.add('active');
                 if(userLangElement) userLangElement.textContent = currentLang.toUpperCase();
 
@@ -583,7 +598,7 @@
                 if(speedElement) {
                     if (navigator.connection) {
                         const speed = navigator.connection.downlink;
-                        speedElement.textContent = speed >= 5 ? ${speed} Mbps : ${speed} Mbps;
+                        speedElement.textContent = speed + " Mbps";
                     } else {
                         speedElement.textContent = "Excellent / Stable";
                     }
@@ -596,5 +611,3 @@
     </script>
 </body>
 </html>
-Le message disparaîtra dans 23h
-23h
